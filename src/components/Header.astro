@@ -24,13 +24,13 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 </header>
 <style>
 	header {
+		z-index: 99;
 		position: fixed;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 2rem;
 		width: 100%;
-		background-color: var(--color-primary);
 	}
 	ul {
 		display: flex;

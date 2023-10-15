@@ -2,16 +2,19 @@
 import Layout from "../layouts/Layout.astro";
 import SimpleSection from "../components/SimpleSection.astro";
 
+import image4 from "../assets/images/4.webp";
+
 const title = "About";
 const description = "About page description";
 ---
 
 <Layout {title} {description}>
 	<main>
-		<h1>About</h1>
+		<!-- <h1>About</h1> -->
 		<SimpleSection
 			heading="Protecting your success"
 			body="Your world can be hard to navigate"
+			image={image4}
 		/>
 	</main>
 </Layout>
