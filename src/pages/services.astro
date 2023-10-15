@@ -1,9 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SimpleSection from "../components/SimpleSection.astro";
+
+const title = "Services";
+const description =
+	"We can connect you to the right expertise across the following areas:";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout {title} {description}>
 	<main>
 		<h1>Services</h1>
 		<SimpleSection

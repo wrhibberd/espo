@@ -2,9 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import SimpleSection from "../components/SimpleSection.astro";
 import AnimatedSection from "../components/AnimatedSection.astro";
+
+const title = "Elite Sport Private Office";
+const description =
+	"Elite Sport Private Office is a high-end network of specialist experts.";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout {title} {description}>
 	<main>
 		<h1>Elite Sport Private Office</h1>
 		<SimpleSection

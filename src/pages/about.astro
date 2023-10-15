@@ -1,9 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SimpleSection from "../components/SimpleSection.astro";
+
+const title = "About";
+const description = "About page description";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout {title} {description}>
 	<main>
 		<h1>About</h1>
 		<SimpleSection
