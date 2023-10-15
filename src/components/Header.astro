@@ -1,9 +1,18 @@
 ---
-
+import Logo from "./Logo.astro";
+const homepage = `${Astro.url.origin}/` === Astro.url.href;
 ---
 
 <header>
-	<a href="/">logo</a>
+	{
+		homepage ? (
+			<Logo size="medium" />
+		) : (
+			<a href={Astro.url.origin} class="logo">
+				<Logo size="medium" />
+			</a>
+		)
+	}
 	<nav>
 		<ul>
 			<li><a href="/approach">approach</a></li>
@@ -13,3 +22,25 @@
 		</ul>
 	</nav>
 </header>
+<style>
+	header {
+		position: fixed;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 2rem;
+		width: 100%;
+		background-color: var(--color-primary);
+	}
+	ul {
+		display: flex;
+		list-style: none;
+		gap: 2rem;
+	}
+	a {
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+</style>

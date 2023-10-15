@@ -1,5 +1,23 @@
 ---
-
+import Logo from "./Logo.astro";
+const homepage = `${Astro.url.origin}/` === Astro.url.href;
 ---
 
-<footer>footer</footer>
+<footer>
+	{
+		homepage ? (
+			<Logo size="small" />
+		) : (
+			<a href={Astro.url.origin} class="logo">
+				<Logo size="small" />
+			</a>
+		)
+	}
+</footer>
+<style>
+	footer {
+		border-top: 1px solid var(--color-text);
+		padding: 2rem;
+		background-color: var(--color-primary);
+	}
+</style>
