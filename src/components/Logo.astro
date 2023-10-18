@@ -10,7 +10,7 @@ const { size } = Astro.props as Props;
 	xmlns="http://www.w3.org/2000/svg"
 	class:list={[
 		size === "small" && "w-[150px]",
-		size === "large" && "w-[260px]",
+		size === "large" && "w-[150px] md:w-[260px]",
 	]}
 	fill="currentColor"
 	viewBox="0 0 260 82"
