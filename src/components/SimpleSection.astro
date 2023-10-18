@@ -3,17 +3,23 @@ import type { ImageMetadata } from "astro";
 interface Props {
 	heading: string;
 	body: string;
+	position?: "top" | "center" | "bottom";
 	alt?: string;
 	image?: ImageMetadata;
 }
 
 import { Image } from "astro:assets";
 
-const { heading, body, alt, image } = Astro.props as Props;
+const { heading, body, position = "top", alt, image } = Astro.props as Props;
 ---
 
 <section
-	class="relative min-h-[100dvh] flex flex-col justify-center p-[2.5rem]"
+	class:list={[
+		"relative min-h-[100dvh] flex flex-col px-[2.5rem] pt-[17.5rem] pb-[5rem]",
+		{ "justify-start": position === "top" },
+		{ "justify-center": position === "center" },
+		{ "justify-end": position === "bottom" },
+	]}
 >
 	{
 		image && alt && (

@@ -24,19 +24,26 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 ---
 
 <header class="fixed z-50 flex justify-between align-top p-[2.5rem] w-full">
+	<div
+		id="headerOverlay"
+		class="absolute inset-0 transition-opacity duration-1000 opacity-0 bg-gradient-to-b from-black to-transparent"
+	>
+	</div>
 	{
 		homepage ? (
-			<Logo size="large" />
+			<div class="shrink-0 relative">
+				<Logo size="large" />
+			</div>
 		) : (
 			<a
 				href={Astro.url.origin}
-				class="transition-opacity duration-300 hover:opacity-60"
+				class="transition-opacity duration-300 hover:opacity-60 shrink-0 block"
 			>
 				<Logo size="large" />
 			</a>
 		)
 	}
-	<nav>
+	<nav class="relative">
 		<ul class="flex gap-[1.5rem]">
 			{
 				pages.map((page) => (
@@ -56,3 +63,18 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 		</ul>
 	</nav>
 </header>
+
+<script>
+	const headerOverlay = document.querySelector("#headerOverlay");
+	if (headerOverlay) {
+		addEventListener("scroll", () => {
+			if (window.scrollY > 120) {
+				headerOverlay.classList.remove("opacity-0");
+				headerOverlay.classList.add("opacity-100");
+			} else {
+				headerOverlay.classList.remove("opacity-100");
+				headerOverlay.classList.add("opacity-0");
+			}
+		});
+	}
+</script>
