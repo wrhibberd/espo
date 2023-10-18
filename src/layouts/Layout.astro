@@ -7,7 +7,7 @@ interface Props {
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-import "../styles/reset.css";
+import "../styles/app.pcss";
 
 const { title, description } = Astro.props;
 ---
@@ -48,37 +48,3 @@ const { title, description } = Astro.props;
 		<Footer />
 	</body>
 </html>
-
-<style is:global>
-	:root {
-		--color-text: #fff;
-		--color-background: #000;
-		--color-primary: #001711;
-	}
-	body {
-		display: flex;
-		flex-direction: column;
-		min-height: 100dvh;
-		color: var(--color-text);
-		background-color: var(--color-background);
-	}
-	main {
-		flex-grow: 1;
-	}
-	section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		padding: 2rem;
-		min-height: 100dvh;
-		background-color: var(--color-background);
-	}
-	a.logo {
-		color: var(--color-text);
-		transition: opacity 0.3s ease-in-out;
-		&:hover {
-			opacity: 0.6;
-		}
-	}
-</style>

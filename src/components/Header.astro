@@ -1,46 +1,58 @@
 ---
 import Logo from "./Logo.astro";
+
+const pages = [
+	{
+		name: "Our Approach",
+		href: "/approach",
+	},
+	{
+		name: "About Us",
+		href: "/about",
+	},
+	{
+		name: "Services",
+		href: "/services",
+	},
+	{
+		name: "Contact",
+		href: "/contact",
+	},
+];
+
 const homepage = `${Astro.url.origin}/` === Astro.url.href;
 ---
 
-<header>
+<header class="fixed z-50 flex justify-between align-top p-[2.5rem] w-full">
 	{
 		homepage ? (
-			<Logo size="medium" />
+			<Logo size="large" />
 		) : (
-			<a href={Astro.url.origin} class="logo">
-				<Logo size="medium" />
+			<a
+				href={Astro.url.origin}
+				class="transition-opacity duration-300 hover:opacity-60"
+			>
+				<Logo size="large" />
 			</a>
 		)
 	}
 	<nav>
-		<ul>
-			<li><a href="/approach">approach</a></li>
-			<li><a href="/about">about</a></li>
-			<li><a href="/services">services</a></li>
-			<li><a href="/contact">contact</a></li>
+		<ul class="flex gap-[1.5rem]">
+			{
+				pages.map((page) => (
+					<li>
+						<a
+							href={page.href}
+							class:list={[
+								Astro.url.pathname === page.href &&
+									"border-b-2 border-current",
+							]}
+						>
+							{page.name}
+						</a>
+					</li>
+				))
+			}
 		</ul>
 	</nav>
 </header>
-<style>
-	header {
-		z-index: 99;
-		position: fixed;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 2rem;
-		width: 100%;
-	}
-	ul {
-		display: flex;
-		list-style: none;
-		gap: 2rem;
-	}
-	a {
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-</style>

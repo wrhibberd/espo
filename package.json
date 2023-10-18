@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.1",
+    "@astrojs/tailwind": "^5.0.2",
     "astro": "^3.3.0",
     "autoprefixer": "^10.4.16",
-    "postcss-responsive-type": "^1.0.0"
+    "postcss-responsive-type": "^1.0.0",
+    "tailwindcss": "^3.0.24"
   }
 }
