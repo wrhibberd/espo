@@ -1,12 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-	body {
-		@apply flex flex-col min-h-[100dvh] text-white bg-green;
+	@font-face {
+		font-family: "brick";
+		src: url("../assets/fonts/brick-display-light-pro.woff2")
+				format("woff2"),
+			url("../assets/fonts/brick-display-light-pro.woff") format("woff"),
+			url("../assets/fonts/brick-display-light-pro.ttf")
+				format("truetype");
+		font-weight: normal;
+		font-style: normal;
 	}
+	body {
+		@apply flex flex-col min-h-[100dvh] text-white bg-green selection:text-green selection:bg-white;
+	}
+
 	main {
 		@apply flex-grow;
+	}
+
+	nav > ul > li > a,
+	h2 {
+		@apply font-serif;
+	}
+
+	.r-lg {
+		font-size: responsive 26px 64px; /* min-size, max-size */
+		font-range: 640px 1280px;
+		@apply leading-[0.95em] tracking-[-0.075em];
 	}
 }

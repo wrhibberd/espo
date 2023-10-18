@@ -4,6 +4,8 @@ interface Props {
 	description: string;
 }
 
+import { ViewTransitions } from "astro:transitions";
+
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -17,7 +19,7 @@ const { title, description } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<!-- TODO remove on prod -->
 		<meta name="robots" content="noindex,nofollow" />
@@ -41,6 +43,7 @@ const { title, description } = Astro.props;
 		<meta name="twitter:image:width" content="1200" />
 		<meta name="twitter:image:height" content="600" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<ViewTransitions />
 	</head>
 	<body>
 		<Header />
