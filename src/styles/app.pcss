@@ -5,6 +5,10 @@
 @tailwind utilities;
 
 @layer base {
+	* {
+		@apply focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-white focus-visible:ring-offset-[0.125rem] focus-visible:ring-offset-green focus-visible:rounded-sm;
+	}
+
 	@font-face {
 		font-family: "brick";
 		src: url("../assets/fonts/brick-display-light-pro.woff2")
