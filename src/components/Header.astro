@@ -49,7 +49,7 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 		<button
 			id="mobileNavToggle"
 			aria-label="toggle mobile menu"
-			class="md:hidden">Menu</button
+			class="md:hidden link">Menu</button
 		>
 		<ul class="gap-20 hidden md:flex">
 			{
@@ -57,9 +57,9 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 					<li>
 						<a
 							href={page.href}
-							class:list={[
+							class:list={['link',
 								Astro.url.pathname === page.href &&
-									"border-b-2 border-current",
+									"active",
 							]}
 						>
 							{page.name}
@@ -81,9 +81,9 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 				<li>
 					<a
 						href={page.href}
-						class:list={[
+						class:list={['link',
 							Astro.url.pathname === page.href &&
-								"border-b-2 border-current",
+								"active",
 						]}
 					>
 						{page.name}
