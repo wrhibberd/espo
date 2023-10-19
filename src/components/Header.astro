@@ -57,9 +57,9 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 					<li>
 						<a
 							href={page.href}
-							class:list={['link',
-								Astro.url.pathname === page.href &&
-									"active",
+							class:list={[
+								"link",
+								Astro.url.pathname === page.href && "active",
 							]}
 						>
 							{page.name}
@@ -73,7 +73,7 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 
 <nav
 	id="mobileNav"
-	class="fixed inset-0 bg-green z-40 flex-col justify-end p-20 opacity-0 -translate-y-100 hidden text-md"
+	class="fixed inset-0 bg-green z-40 flex-col justify-end p-20 opacity-0 -translate-y-100 text-md"
 >
 	<ul class="space-y-20">
 		{
@@ -81,9 +81,9 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 				<li>
 					<a
 						href={page.href}
-						class:list={['link',
-							Astro.url.pathname === page.href &&
-								"active",
+						class:list={[
+							"link",
+							Astro.url.pathname === page.href && "active",
 						]}
 					>
 						{page.name}
@@ -108,7 +108,7 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 			[
 				mobileNav,
 				{
-					display: ["none", "flex"],
+					// display: ["none", "flex"],
 					opacity: [0, 1],
 					y: ["-100%", 0],
 				},
@@ -140,7 +140,7 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 			[
 				mobileNav,
 				{
-					display: ["flex", "none"],
+					// display: ["flex", "none"],
 					opacity: [1, 0],
 					y: [0, "-100%"],
 				},
