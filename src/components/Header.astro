@@ -46,7 +46,11 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 		)
 	}
 	<nav class="relative">
-		<button aria-label="toggle mobile menu" class="md:hidden">Menu</button>
+		<button
+			id="mobileNavToggle"
+			aria-label="toggle mobile menu"
+			class="md:hidden">Menu</button
+		>
 		<ul class="gap-[1.5rem] hidden md:flex">
 			{
 				pages.map((page) => (
@@ -67,17 +71,138 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 	</nav>
 </header>
 
+<nav
+	id="mobileNav"
+	class="fixed inset-0 bg-green z-40 flex flex-col justify-end p-[1.25rem] opacity-0 -translate-y-100"
+>
+	<ul class="gap-[1.5rem]">
+		{
+			pages.map((page) => (
+				<li>
+					<a
+						href={page.href}
+						class:list={[
+							Astro.url.pathname === page.href &&
+								"border-b-2 border-current",
+						]}
+					>
+						{page.name}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>
+
 <script>
+	import { timeline, stagger } from "motion";
 	const headerOverlay = document.querySelector("#headerOverlay");
-	if (headerOverlay) {
-		addEventListener("scroll", () => {
+	const mobileNav = document.querySelector("#mobileNav");
+	const mobileNavButton = document.querySelector("#mobileNavToggle");
+	let menuOpen = false;
+
+	// define menu animations
+	const menuTimeline = [
+		[
+			mobileNav,
+			{
+				opacity: [0, 1],
+				y: ["-100%", 0],
+			},
+			{
+				duration: 0.3,
+			},
+		],
+		[
+			"#mobileNav li",
+			{
+				x: ["-100%", 0],
+			},
+			{
+				delay: stagger(0.1),
+			},
+		],
+	] as any;
+
+	const menuTimelineReverse = [
+		[
+			"#mobileNav li",
+			{
+				x: [0, "-100%"],
+			},
+			{
+				delay: stagger(0.1, { from: "last" }),
+			},
+		],
+		[
+			mobileNav,
+			{
+				opacity: [1, 0],
+				y: [0, "-100%"],
+			},
+			{
+				duration: 0.3,
+			},
+		],
+	] as any;
+
+	// toggle header overlay
+	function toggleOverlay() {
+		if (!headerOverlay || menuOpen) {
+			return;
+		}
+		if (window.scrollY > 120) {
+			headerOverlay.classList.remove("opacity-0");
+			headerOverlay.classList.add("opacity-100");
+		} else {
+			headerOverlay.classList.remove("opacity-100");
+			headerOverlay.classList.add("opacity-0");
+		}
+	}
+
+	// change mobile nav button text
+	function changeMobileButtonText() {
+		if (mobileNavButton) {
+			mobileNavButton.innerHTML = menuOpen ? "Close" : "Menu";
+		}
+	}
+
+	// animate menu
+	function animateMenu() {
+		if (!mobileNav || !headerOverlay) {
+			return;
+		}
+		if (menuOpen) {
+			document.body.style.overflow = "hidden";
+			timeline(menuTimeline);
 			if (window.scrollY > 120) {
-				headerOverlay.classList.remove("opacity-0");
-				headerOverlay.classList.add("opacity-100");
-			} else {
 				headerOverlay.classList.remove("opacity-100");
 				headerOverlay.classList.add("opacity-0");
 			}
+		} else {
+			document.body.style.overflow = "auto";
+			timeline(menuTimelineReverse);
+			if (window.scrollY > 120) {
+				headerOverlay.classList.add("opacity-100");
+				headerOverlay.classList.remove("opacity-0");
+			}
+		}
+	}
+
+	// add event listeners
+	addEventListener("scroll", toggleOverlay);
+	addEventListener("resize", () => {
+		if (menuOpen && window.innerWidth > 768) {
+			menuOpen = false;
+			changeMobileButtonText();
+			animateMenu();
+		}
+	});
+	if (mobileNavButton) {
+		mobileNavButton.addEventListener("click", () => {
+			menuOpen = !menuOpen;
+			changeMobileButtonText();
+			animateMenu();
 		});
 	}
 </script>
