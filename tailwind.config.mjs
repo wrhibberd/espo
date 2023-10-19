@@ -22,6 +22,7 @@ export default {
 		spacing: {
 			0: "0",
 			2: "0.125rem",
+			10: "0.625rem",
 			20: "1.25rem",
 			30: "1.875rem",
 			40: "2.5rem",
