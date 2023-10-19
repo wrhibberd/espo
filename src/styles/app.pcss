@@ -34,6 +34,18 @@
 		@apply font-serif leading-[0.95em] tracking-[-0.075em];
 	}
 
+	.blur-up {
+		transition: opacity 300ms, filter 300ms;
+		@apply opacity-75 filter blur;
+	}
+
+	.blur-up.lazyloaded {
+		@apply opacity-100 blur-none;
+	}
+
+	.background-pattern {
+		background-image: url("../assets/images/pattern.png");
+	}
 	.link {
 		@apply relative;
 		&:hover::before,

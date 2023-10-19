@@ -9,7 +9,7 @@ interface Props {
 	image?: ImageMetadata;
 }
 
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 
 const {
 	heading,
@@ -23,7 +23,7 @@ const {
 
 <section
 	class:list={[
-		"relative min-h-[100lvh] flex flex-col px-40 pt-280 pb-80",
+		"background-pattern relative min-h-[100lvh] flex flex-col px-20 md:px-40 pt-190 md:pt-280 pb-40 md:pb-80",
 		{ "justify-start": position === "top" },
 		{ "justify-center": position === "center" },
 		{ "justify-end": position === "bottom" },
@@ -31,17 +31,31 @@ const {
 >
 	{
 		image && alt && (
-			<Image
+			<Picture
 				src={image}
 				alt={alt}
-				class="w-full h-full object-cover absolute inset-0"
+				widths={[400, 800, 1200, 1600]}
+				formats={["webp", "avif"]}
+				fallbackFormat="jpg"
+				pictureAttributes={{
+					class: "overflow-hidden w-full h-full",
+				}}
+				class="w-full h-full object-cover absolute inset-0 lazyload blur-up"
 			/>
 		)
 	}
-	<div class="absolute inset-0 bg-black/50"></div>
+	<div
+		class:list={["absolute inset-0", image ? "bg-black/50" : "bg-black/25"]}
+	>
+	</div>
 	<div class="md:ml-90 relative md:max-w-[26.25rem]">
 		<h2 class="mb-30 md:mb-60 r-lg [text-wrap:balance]">{heading}</h2>
-		<div class:list={['text-sm [text-wrap:pretty] rich-text', services ? 'sm:columns-2 sm:gap-20' : 'md:max-w-[13.125rem]']}>
+		<div
+			class:list={[
+				"text-sm [text-wrap:pretty] rich-text",
+				services ? "sm:columns-2 sm:gap-20" : "md:max-w-[13.125rem]",
+			]}
+		>
 			<div set:html={body} />
 			{
 				services && (
