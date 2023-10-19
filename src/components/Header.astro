@@ -28,7 +28,7 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 >
 	<div
 		id="headerOverlay"
-		class="absolute inset-0 transition-opacity duration-1000 opacity-0 bg-gradient-to-b from-black to-transparent"
+		class="absolute inset-0 transition-opacity duration-1000 opacity-0 bg-gradient-to-b from-black to-transparent pointer-events-none"
 	>
 	</div>
 	{
@@ -96,113 +96,118 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 
 <script>
 	import { timeline, stagger } from "motion";
-	const headerOverlay = document.querySelector("#headerOverlay");
-	const mobileNav = document.querySelector("#mobileNav");
-	const mobileNavButton = document.querySelector("#mobileNavToggle");
-	let menuOpen = false;
 
-	// define menu animations
-	const menuTimeline = [
-		[
-			mobileNav,
-			{
-				opacity: [0, 1],
-				y: ["-100%", 0],
-			},
-			{
-				duration: 0.3,
-			},
-		],
-		[
-			"#mobileNav li",
-			{
-				x: ["-100%", 0],
-			},
-			{
-				delay: stagger(0.1),
-			},
-		],
-	] as any;
+	const headerFuncs = () => {
+		const headerOverlay = document.querySelector("#headerOverlay");
+		const mobileNav = document.querySelector("#mobileNav");
+		const mobileNavButton = document.querySelector("#mobileNavToggle");
+		let menuOpen = false;
 
-	const menuTimelineReverse = [
-		[
-			"#mobileNav li",
-			{
-				x: [0, "-100%"],
-			},
-			{
-				delay: stagger(0.1, { from: "last" }),
-			},
-		],
-		[
-			mobileNav,
-			{
-				opacity: [1, 0],
-				y: [0, "-100%"],
-			},
-			{
-				duration: 0.3,
-			},
-		],
-	] as any;
+		// define menu animations
+		const menuTimeline = [
+			[
+				mobileNav,
+				{
+					opacity: [0, 1],
+					y: ["-100%", 0],
+				},
+				{
+					duration: 0.3,
+				},
+			],
+			[
+				"#mobileNav li",
+				{
+					x: ["-100%", 0],
+				},
+				{
+					delay: stagger(0.1),
+				},
+			],
+		] as any;
 
-	// toggle header overlay
-	function toggleOverlay() {
-		if (!headerOverlay || menuOpen) {
-			return;
-		}
-		if (window.scrollY > 120) {
-			headerOverlay.classList.remove("opacity-0");
-			headerOverlay.classList.add("opacity-100");
-		} else {
-			headerOverlay.classList.remove("opacity-100");
-			headerOverlay.classList.add("opacity-0");
-		}
-	}
+		const menuTimelineReverse = [
+			[
+				"#mobileNav li",
+				{
+					x: [0, "-100%"],
+				},
+				{
+					delay: stagger(0.1, { from: "last" }),
+				},
+			],
+			[
+				mobileNav,
+				{
+					opacity: [1, 0],
+					y: [0, "-100%"],
+				},
+				{
+					duration: 0.3,
+				},
+			],
+		] as any;
 
-	// change mobile nav button text
-	function changeMobileButtonText() {
-		if (mobileNavButton) {
-			mobileNavButton.innerHTML = menuOpen ? "Close" : "Menu";
-		}
-	}
-
-	// animate menu
-	function animateMenu() {
-		if (!mobileNav || !headerOverlay) {
-			return;
-		}
-		if (menuOpen) {
-			document.body.style.overflow = "hidden";
-			timeline(menuTimeline);
+		// toggle header overlay
+		function toggleOverlay() {
+			if (!headerOverlay || menuOpen) {
+				return;
+			}
 			if (window.scrollY > 120) {
+				headerOverlay.classList.remove("opacity-0");
+				headerOverlay.classList.add("opacity-100");
+			} else {
 				headerOverlay.classList.remove("opacity-100");
 				headerOverlay.classList.add("opacity-0");
 			}
-		} else {
-			document.body.style.overflow = "auto";
-			timeline(menuTimelineReverse);
-			if (window.scrollY > 120) {
-				headerOverlay.classList.add("opacity-100");
-				headerOverlay.classList.remove("opacity-0");
+		}
+
+		// change mobile nav button text
+		function changeMobileButtonText() {
+			if (mobileNavButton) {
+				mobileNavButton.innerHTML = menuOpen ? "Close" : "Menu";
 			}
 		}
-	}
 
-	// add event listeners
-	addEventListener("scroll", toggleOverlay);
-	addEventListener("resize", () => {
-		if (menuOpen && window.innerWidth > 768) {
-			menuOpen = false;
-			changeMobileButtonText();
-			animateMenu();
+		// animate menu
+		function animateMenu() {
+			if (!mobileNav || !headerOverlay) {
+				return;
+			}
+			if (menuOpen) {
+				document.body.style.overflow = "hidden";
+				timeline(menuTimeline);
+				if (window.scrollY > 120) {
+					headerOverlay.classList.remove("opacity-100");
+					headerOverlay.classList.add("opacity-0");
+				}
+			} else {
+				document.body.style.overflow = "auto";
+				timeline(menuTimelineReverse);
+				if (window.scrollY > 120) {
+					headerOverlay.classList.add("opacity-100");
+					headerOverlay.classList.remove("opacity-0");
+				}
+			}
 		}
-	});
-	if (mobileNavButton) {
-		mobileNavButton.addEventListener("click", () => {
-			menuOpen = !menuOpen;
-			changeMobileButtonText();
-			animateMenu();
+
+		// add event listeners
+		addEventListener("scroll", toggleOverlay);
+		addEventListener("resize", () => {
+			if (menuOpen && window.innerWidth > 768) {
+				menuOpen = false;
+				changeMobileButtonText();
+				animateMenu();
+			}
 		});
-	}
+		if (mobileNavButton) {
+			mobileNavButton.addEventListener("click", () => {
+				menuOpen = !menuOpen;
+				changeMobileButtonText();
+				animateMenu();
+			});
+		}
+	};
+	headerFuncs();
+	document.addEventListener("astro:after-swap", headerFuncs);
 </script>

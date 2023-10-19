@@ -32,9 +32,9 @@ const { heading, body, position = "top", alt, image } = Astro.props as Props;
 	}
 	<div class="absolute inset-0 bg-black/50"></div>
 	<div
-		class="ml-[5.625rem] relative space-y-[1.875rem] md:space-y-[3.75rem] max-w-[26.25rem]"
+		class="md:ml-[5.625rem] relative space-y-[1.875rem] md:space-y-[3.75rem] md:max-w-[26.25rem]"
 	>
 		<h2 class="r-lg [text-wrap:balance]">{heading}</h2>
-		<p class="text-sm max-w-[13.125rem] [text-wrap:pretty]">{body}</p>
+		<p class="text-sm md:max-w-[13.125rem] [text-wrap:pretty]">{body}</p>
 	</div>
 </section>
