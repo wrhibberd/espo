@@ -24,7 +24,7 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 ---
 
 <header
-	class="fixed z-50 inset-x-0 top-0 flex justify-between align-top p-[2.5rem] w-full"
+	class="fixed z-50 inset-x-0 top-0 flex justify-between align-top py-40 px-20 md:px-40 w-full"
 >
 	<div
 		id="headerOverlay"
@@ -45,13 +45,13 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 			</a>
 		)
 	}
-	<nav class="relative">
+	<nav class="relative text-sm">
 		<button
 			id="mobileNavToggle"
 			aria-label="toggle mobile menu"
 			class="md:hidden">Menu</button
 		>
-		<ul class="gap-[1.5rem] hidden md:flex">
+		<ul class="gap-20 hidden md:flex">
 			{
 				pages.map((page) => (
 					<li>
@@ -73,9 +73,9 @@ const homepage = `${Astro.url.origin}/` === Astro.url.href;
 
 <nav
 	id="mobileNav"
-	class="fixed inset-0 bg-green z-40 flex-col justify-end p-[1.25rem] opacity-0 -translate-y-100 hidden"
+	class="fixed inset-0 bg-green z-40 flex-col justify-end p-20 opacity-0 -translate-y-100 hidden text-md"
 >
-	<ul class="gap-[1.5rem]">
+	<ul class="space-y-20">
 		{
 			pages.map((page) => (
 				<li>

@@ -3,7 +3,7 @@ import Logo from "./Logo.astro";
 const homepage = `${Astro.url.origin}/` === Astro.url.href;
 ---
 
-<footer class="bg-green p-[2.5rem]">
+<footer class="bg-green px-20 py-40 md:px-40">
 	{
 		homepage ? (
 			<Logo size="small" />

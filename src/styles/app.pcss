@@ -6,7 +6,7 @@
 
 @layer base {
 	* {
-		@apply focus:outline-none focus-visible:ring-[0.125rem] focus-visible:ring-white focus-visible:ring-offset-[0.125rem] focus-visible:ring-offset-green focus-visible:rounded-sm;
+		@apply focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-green focus-visible:rounded-sm;
 	}
 
 	@font-face {
@@ -30,12 +30,32 @@
 	nav > ul > li > a,
 	nav > button,
 	h2 {
-		@apply font-serif;
+		@apply font-serif leading-[0.95em] tracking-[-0.075em];
+	}
+
+	.rich-text {
+		@apply break-words tracking-[-0.025em];
+		* {
+			@apply mb-em last:mb-0;
+		}
+
+		b,
+		strong,
+		i,
+		em,
+		a,
+		br,
+		li {
+			@apply mb-0;
+		}
+
+		a {
+			@apply underline;
+		}
 	}
 
 	.r-lg {
 		font-size: responsive 26px 64px; /* min-size, max-size */
 		font-range: 640px 1280px;
-		@apply leading-[0.95em] tracking-[-0.075em];
 	}
 }

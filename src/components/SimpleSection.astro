@@ -3,6 +3,7 @@ import type { ImageMetadata } from "astro";
 interface Props {
 	heading: string;
 	body: string;
+	services?: Array<string>;
 	position?: "top" | "center" | "bottom";
 	alt?: string;
 	image?: ImageMetadata;
@@ -10,12 +11,19 @@ interface Props {
 
 import { Image } from "astro:assets";
 
-const { heading, body, position = "top", alt, image } = Astro.props as Props;
+const {
+	heading,
+	body,
+	services,
+	position = "top",
+	alt,
+	image,
+} = Astro.props as Props;
 ---
 
 <section
 	class:list={[
-		"relative min-h-[100dvh] flex flex-col px-[2.5rem] pt-[17.5rem] pb-[5rem]",
+		"relative min-h-[100lvh] flex flex-col px-40 pt-280 pb-80",
 		{ "justify-start": position === "top" },
 		{ "justify-center": position === "center" },
 		{ "justify-end": position === "bottom" },
@@ -31,10 +39,19 @@ const { heading, body, position = "top", alt, image } = Astro.props as Props;
 		)
 	}
 	<div class="absolute inset-0 bg-black/50"></div>
-	<div
-		class="md:ml-[5.625rem] relative space-y-[1.875rem] md:space-y-[3.75rem] md:max-w-[26.25rem]"
-	>
-		<h2 class="r-lg [text-wrap:balance]">{heading}</h2>
-		<p class="text-sm md:max-w-[13.125rem] [text-wrap:pretty]">{body}</p>
+	<div class="md:ml-90 relative md:max-w-[26.25rem]">
+		<h2 class="mb-30 md:mb-60 r-lg [text-wrap:balance]">{heading}</h2>
+		<div class:list={['text-sm [text-wrap:pretty] rich-text', services ? 'sm:columns-2 sm:gap-20' : 'md:max-w-[13.125rem]']}>
+			<div set:html={body} />
+			{
+				services && (
+					<ul>
+						{services.map((service) => (
+							<li>{service}</li>
+						))}
+					</ul>
+				)
+			}
+		</div>
 	</div>
 </section>
