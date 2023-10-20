@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,13 +16,19 @@
 				format("truetype");
 		font-weight: normal;
 		font-style: normal;
+		font-display: swap;
 	}
+	html,
 	body {
-		@apply flex flex-col min-h-[100dvh] text-white bg-green selection:text-green selection:bg-white;
+		@apply min-h-screen;
+	}
+
+	body {
+		@apply flex flex-col h-full text-white bg-green selection:text-green selection:bg-white;
 	}
 
 	main {
-		@apply flex-grow;
+		@apply flex-grow h-full w-full;
 	}
 
 	nav > ul > li > a,
@@ -45,6 +49,9 @@
 
 	.background-pattern {
 		background-image: url("../assets/images/pattern.png");
+		background-repeat: repeat;
+		background-size: 200px;
+		background-position: center;
 	}
 	.link {
 		@apply relative;
@@ -103,6 +110,15 @@
 		}
 	}
 
+	.r-sm {
+		font-size: responsive 12px 14px; /* min-size, max-size */
+		font-range: 640px 1280px;
+		@apply leading-[1.18em];
+	}
+	.r-md {
+		font-size: responsive 16px 26px; /* min-size, max-size */
+		font-range: 640px 1280px;
+	}
 	.r-lg {
 		font-size: responsive 26px 64px; /* min-size, max-size */
 		font-range: 640px 1280px;
