@@ -27,10 +27,7 @@ const { title, description } = Astro.props;
 		<meta name="description" content={description} />
 		<meta property="og:locale" content="en_GB" />
 		<meta property="og:title" content={title} />
-		<meta
-			property="og:site_name"
-			content="2022 GANNI Responsibility Report"
-		/>
+		<meta property="og:site_name" content="Elite Sport Private Office" />
 		<meta property="og:url" content={Astro.url.href} />
 		<meta property="og:description" content={description} />
 		<!-- <meta property="og:image" content="/seo/twitter-ganni.jpg" /> -->
@@ -49,7 +46,7 @@ const { title, description } = Astro.props;
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap"
 			rel="stylesheet"
 		/>
-		<ViewTransitions />
+		<ViewTransitions fallback="none" />
 	</head>
 	<body>
 		<Header />
