@@ -28,7 +28,6 @@ const {
 <section
 	class:list={[
 		"relative h-full min-h-screen flex flex-col px-20 md:px-40 pt-190 md:pt-280 pb-40 md:pb-80",
-		{ "background-pattern": !image },
 		{ "justify-start": mobilePosition === "top" },
 		{ "justify-center": mobilePosition === "center" },
 		{ "justify-end": mobilePosition === "bottom" },
@@ -37,6 +36,7 @@ const {
 		{ "md:justify-end": position === "bottom" },
 	]}
 >
+	{!image && <div class="absolute inset-0 background-pattern opacity-80" />}
 	{
 		image && alt && (
 			<Picture
