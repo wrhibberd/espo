@@ -6,6 +6,16 @@ interface Props {
 	services?: Array<string>;
 	position?: "top" | "center" | "bottom";
 	mobilePosition?: "top" | "center" | "bottom";
+	pinImageOnMobile?:
+		| "top"
+		| "right top"
+		| "right"
+		| "right bottom"
+		| "bottom"
+		| "left bottom"
+		| "left"
+		| "left top"
+		| "center";
 	alt?: string;
 	image?: ImageMetadata;
 	loading?: "lazy" | "eager";
@@ -19,6 +29,7 @@ const {
 	services,
 	position = "top",
 	mobilePosition = "bottom",
+	pinImageOnMobile = "left bottom",
 	alt,
 	image,
 	loading = "lazy",
@@ -48,7 +59,19 @@ const {
 				pictureAttributes={{
 					class: "overflow-hidden w-full h-full",
 				}}
-				class="w-full h-full object-cover absolute inset-0 lazyload blur-up object-left-bottom sm:object-center"
+				class:list={[
+					"w-full h-full object-cover absolute inset-0 lazyload blur-up sm:object-center",
+					pinImageOnMobile === "top" && "object-top",
+					pinImageOnMobile === "right top" && "object-right-top",
+					pinImageOnMobile === "right" && "object-right",
+					pinImageOnMobile === "right bottom" &&
+						"object-bottom-right",
+					pinImageOnMobile === "bottom" && "object-bottom",
+					pinImageOnMobile === "left bottom" && "object-left-bottom",
+					pinImageOnMobile === "left" && "object-left",
+					pinImageOnMobile === "left top" && "object-left-top",
+					pinImageOnMobile === "center" && "object-center",
+				]}
 			/>
 		)
 	}
